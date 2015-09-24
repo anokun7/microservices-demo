@@ -15,24 +15,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
       panic(err)
     }
     defer c.Close()
-    n, err := c.Do("EXISTS", host)
-    if n == 0 {
-      c.Do("SET", host, 1)
-    } else {
-      incr, _ := redis.Int(c.Do("GET", host))
-      c.Do("SET", host, incr+1)
-    }
-    stats, err := redis.String(c.Do("GET", host))
-    if err != nil {
-      fmt.Fprintf(w, "Key not found")
-    }
+    c.Do("INCR", host)
+    keys, _ := redis.Strings(c.Do("KEYS", "*"))
     fmt.Fprintf(w, "<hr/>")
-    fmt.Fprintf(w, "<table>")
-    fmt.Fprintf(w, "<tr><td>%s</td><td>%s</td></tr>", host, stats)
-    fmt.Fprintf(w, "</table>")
+    fmt.Fprintf(w, "<div>")
+    for _, key := range keys {
+      value, _ := redis.Int(c.Do("GET", key))
+      fmt.Fprintf(w, "<span style=\"width: 8em; padding: .2em; border: 1px dotted\">%s</span>",key)
+      fmt.Fprintf(w, "<span style=\"width: 2em; padding: .2em; border: 1px dotted\">%d</span>",value)
+    }
+    fmt.Fprintf(w, "</div>")
 }
 
 func main() {
-    http.HandleFunc("/", handler)
+    http.HandleFunc("/a", handler)
     http.ListenAndServe(":8080", nil)
 }
