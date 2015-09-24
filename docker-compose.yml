@@ -4,16 +4,16 @@ dbdata:
   volumes: 
     - /data
 
-redis: 
+db: 
   image: "redis:latest"
   ports: 
-    - "6379:6379"
+    - "6379"
   volumes_from: 
     - dbdata
 
 web: 
   build: .
   links: 
-    - "redis:db"
+    - "db:redis-db"
   ports: 
-    - "80:8080"
+    - "8080"
