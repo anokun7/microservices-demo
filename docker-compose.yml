@@ -13,7 +13,8 @@ db:
 
 web: 
   build: .
-  hostname: docker-training.com
+  environment:
+    - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
   links: 
     - "db:redis-db"
   ports: 
