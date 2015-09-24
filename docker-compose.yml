@@ -1,0 +1,18 @@
+--- 
+dbdata: 
+  image: "redis:latest"
+  volumes: 
+    - /data
+redis: 
+  image: "redis:latest"
+  ports: 
+    - "6379:6379"
+  volumes_from: 
+    - dbdata
+web: 
+  build: .
+  links: 
+    - "redis:db"
+  ports: 
+    - "8080:8080"
+
