@@ -7,12 +7,13 @@ dbdata:
 db: 
   image: "redis:latest"
   ports: 
-    - "6379"
+    - "6379:6379"
   volumes_from: 
     - dbdata
 
 web: 
   build: .
+  hostname: docker-training.com
   links: 
     - "db:redis-db"
   ports: 
