@@ -1,3 +1,2 @@
 FROM golang:onbuild
-
-#RUN go get github.com/garyburd/redigo/redis
+MAINTAINER Anoop Kumar <anokun7@users.noreply.github.com>
