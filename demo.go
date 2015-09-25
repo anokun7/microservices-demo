@@ -21,8 +21,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "<div>")
     for _, key := range keys {
       value, _ := redis.Int(c.Do("GET", key))
-      fmt.Fprintf(w, "<span style=\"width: 8em; padding: .2em; border: 1px dotted\">%s</span>",key)
-      fmt.Fprintf(w, "<span style=\"width: 2em; padding: .2em; border: 1px dotted\">%d</span><br/>",value)
+      fmt.Fprintf(w, "<div><span style=\"min-width: 8em; margin: .2em; border: 1px dotted\">%s</span>",key)
+      fmt.Fprintf(w, "<span style=\"text-align: right; min-width: 2em; margin: .2em; border: 1px dotted\">%d</span></div>",value)
     }
     fmt.Fprintf(w, "</div>")
 }
