@@ -1,21 +1,16 @@
---- 
-dbdata: 
-  image: "redis:latest"
-  volumes: 
-    - /data
-
+---
 db: 
   image: "redis:latest"
   ports: 
     - "6379:6379"
-  volumes_from: 
-    - dbdata
+  volumes: 
+    - /data:/data
 
 web: 
   build: .
-  environment:
-    - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
   links: 
     - "db:redis-db"
+  environment:
+    - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
   ports: 
     - "8080"
