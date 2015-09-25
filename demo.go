@@ -18,11 +18,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
     c.Do("INCR", host)
     keys, _ := redis.Strings(c.Do("KEYS", "*"))
     fmt.Fprintf(w, "<hr/>")
-    fmt.Fprintf(w, "<table style='border-collapse: collapse;'><tr><th style='border: 1px solid black;'>Container</th><th style='border: 1px solid black;'>#</th></tr>")
+    fmt.Fprintf(w, "<table style='width: 10em; border-collapse: collapse;'><tr><th style='border: 2px dotted green;'>Container</th><th style='padding: 5px; border: 2px dotted green;'>#</th></tr>")
     for _, key := range keys {
       value, _ := redis.Int(c.Do("GET", key))
-      fmt.Fprintf(w, "<tr><td style='border: 1px solid black;'>%s</td>",key)
-      fmt.Fprintf(w, "<td style='border: 1px solid black;'>%d</td></tr>",value)
+      fmt.Fprintf(w, "<tr><td style='border: 1px solid green;'>%s</td>",key)
+      fmt.Fprintf(w, "<td style='border: 1px solid green; text-align: center;'>%d</td></tr>",value)
     }
     fmt.Fprintf(w, "</table>")
 }
