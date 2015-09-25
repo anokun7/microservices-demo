@@ -1,2 +1,1 @@
 FROM golang:onbuild
-
