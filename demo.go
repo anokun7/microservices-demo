@@ -18,13 +18,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
     c.Do("INCR", host)
     keys, _ := redis.Strings(c.Do("KEYS", "*"))
     fmt.Fprintf(w, "<hr/>")
-    fmt.Fprintf(w, "<div>")
+    fmt.Fprintf(w, "<table style='border-collapse: collapse;'><tr><th style='border: 1px solid black;'>Container</th><th style='border: 1px solid black;'>#</th></tr>")
     for _, key := range keys {
       value, _ := redis.Int(c.Do("GET", key))
-      fmt.Fprintf(w, "<div><span style=\"min-width: 8em; margin: .2em; border: 1px dotted\">%s</span>",key)
-      fmt.Fprintf(w, "<span style=\"text-align: right; min-width: 2em; margin: .2em; border: 1px dotted\">%d</span></div>",value)
+      fmt.Fprintf(w, "<tr><td style='border: 1px solid black;'>%s</td>",key)
+      fmt.Fprintf(w, "<td style='border: 1px solid black;'>%d</td></tr>",value)
     }
-    fmt.Fprintf(w, "</div>")
+    fmt.Fprintf(w, "</table>")
 }
 
 func main() {
