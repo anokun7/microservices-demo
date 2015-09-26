@@ -42,8 +42,8 @@ A very simple Go-Redis app to demo discovery of multiple services behind a hapro
   Creating and starting 9... done
   Creating and starting 10... done
   ```
-  - Tha HA Proxy stats page should (auto) refresh to show the newly registered backends, like below:
-6. It may be necessary to restart the lb (load balancer) container running HA Proxy. Do this if you do not see any backends registering after the scale up action.
+6. Tha HA Proxy stats page should (auto) refresh to show the newly registered backends, like below:
+  - It may be necessary to restart the lb (load balancer) container running HA Proxy. Do this if you do not see any backends registering after the scale up action.
   ```
   vagrant@ubuntu5:~/microservices-demo$ docker-compose restart lb
   Restarting microservicesdemo_lb_1...
@@ -52,5 +52,5 @@ A very simple Go-Redis app to demo discovery of multiple services behind a hapro
 7. Ensure DNS is setup (or add entries to `/etc/hosts` file) to resolve the host where the `lb0` container is running.
 8. Browse to the URL: `http://[host-ip-running-lb0]/demo`
   - <img src="https://farm1.staticflickr.com/666/21705956952_9b3bfea89f_b.jpg" width=300>
-9. Every time a container responds to the HTTP request, it should get its counter incremented. The counter is being stored (and retrieved) from a REDIS backend database.
-10. Using docker-compose, you cab scale up or down the web containers based on the needs and traffic to your application.
+9. Every time a container responds to the HTTP request, it will get its counter incremented (on a browser refresh). The counter is being stored (and retrieved) from a REDIS backend database.
+10. Using docker-compose, you can scale up or down the web containers as you wish based on the needs and traffic to your application.
