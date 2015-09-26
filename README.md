@@ -51,5 +51,5 @@ A very simple Go-Redis app to demo discovery of multiple services behind a hapro
   ![HA Proxy stats](https://farm1.staticflickr.com/651/21717537885_0c6a3ec632_b.jpg)
 8. Ensure DNS is setup (or add entries to `/etc/hosts` file) to resolve the host where the `lb0` container is running.
 9. Browse to the URL: `http://[host-ip-running-lb0]/demo`
-  <img src="https://farm1.staticflickr.com/666/21705956952_9b3bfea89f_b.jpg" width=300>
+  - <img src="https://farm1.staticflickr.com/666/21705956952_9b3bfea89f_b.jpg" width=300>
 10. Every time a container responds to the HTTP request, it should get its counter incremented. The counter is being stored (and retrieved) from a REDIS backend database.
