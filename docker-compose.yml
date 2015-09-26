@@ -1,4 +1,10 @@
 ---
+lb:
+  build: haproxy
+  container_name: lb0
+  ports:
+   - "80:80"
+
 dbdata:
   image: "redis:latest"
   volumes: 
