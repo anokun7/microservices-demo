@@ -12,7 +12,7 @@ db:
     - dbdata
 
 web: 
-  build: .
+  build: counter-app
   links: 
     - "db:redis-db"
   environment:
