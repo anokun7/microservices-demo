@@ -47,6 +47,9 @@ A very simple Go-Redis app to demo discovery of multiple services behind a hapro
   Starting microservicesdemo_web_8...
   Starting microservicesdemo_web_9...
   ```
+  - Tha HA Proxy stats page should (auto) refresh to show the newly registered backends, like below:
+  - ![HA Proxy stats](https://flic.kr/p/z674on)
 8. Ensure DNS is setup (or add entries to `/etc/hosts` file) to resolve the host where the `lb0` container is running.
 9. Browse to the URL: `http://[host-ip-running-lb0]/demo`
+   - ![Go-Redis-Counter-Demo-Page](https://flic.kr/p/z55GM7)
 10. Every time a container responds to the HTTP request, it should get its counter incremented. The counter is being stored (and retrieved) from a REDIS backend database.
