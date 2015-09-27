@@ -1,5 +1,7 @@
 # microservices-demo
-A very simple Go-Redis app to demo discovery of multiple services behind a haproxy load balanced (using the interlock plugin system)
+A very simple Go-Redis app to demo discovery of multiple services behind a haproxy load balanced (using the interlock plugin system).
+
+This demo uses Docker Swarm, docker-compose and HA Proxy as the load balancer service through the interlock plugin system. If you need a simpler demo that does not use docker-compose, try [the interlock-demo](http://anokun7.github.io/interlock-demo/).
 
 ### Pre-requisites
 1. Ensure Docker Swarm is working. An effective demo would require at least 3 active nodes in the swarm.
