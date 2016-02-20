@@ -1,26 +1,36 @@
----
-lb:
-  build: haproxy
-  ports:
-   - "80:80"
+version: '2'
+services:
+  lb:
+    build: haproxy
+    #container_name: lb
+    ports:
+     - "80:80"
+    networks:
+      - dubdub
 
-dbdata:
-  image: "redis:latest"
-  volumes: 
-    - /data
+  db:
+    image: "redis:latest"
+    #container_name: db
+    ports:
+      - "6379:6379"
+    volumes:
+      - data:/data
+    networks:
+      - dubdub
 
-db: 
-  image: "redis:latest"
-  ports: 
-    - "6379:6379"
-  volumes_from: 
-    - dbdata
+  web:
+    build: counter-app
+    #container_name: web
+    environment:
+      - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
+    ports:
+      - "8080"
+    networks:
+      - dubdub
 
-web: 
-  build: counter-app
-  links: 
-    - "db:redis-db"
-  environment:
-    - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
-  ports: 
-    - "8080"
+networks:
+  dubdub:
+    driver: overlay
+
+volumes:
+  data: {}
