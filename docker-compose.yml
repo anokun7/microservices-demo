@@ -1,16 +1,7 @@
 version: '2'
 services:
-  lb:
-    build: haproxy
-    #container_name: lb
-    ports:
-     - "80:80"
-    networks:
-      - dubdub
-
   db:
     image: "redis:latest"
-    #container_name: db
     ports:
       - "6379:6379"
     volumes:
@@ -20,9 +11,9 @@ services:
 
   web:
     build: counter-app
-    #container_name: web
-    environment:
-      - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
+    labels:
+      - "interlock.hostname: web"
+      - "interlock.domain: docker-training.com"
     ports:
       - "8080"
     networks:
