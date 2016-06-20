@@ -12,8 +12,8 @@ services:
   web:
     build: counter-app
     labels:
-      - "interlock.hostname: web"
-      - "interlock.domain: docker-training.com"
+      - "interlock.hostname=meetup"
+      - "interlock.domain=govcloud.com"
     ports:
       - "8080"
     networks:
