@@ -10,7 +10,7 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
     host := os.Getenv("HOSTNAME")
     fmt.Fprintf(w, "<p>Hi there, from <b>%s</b>!", host)
-    c, err := redis.Dial("tcp", "redis-db:6379")
+    c, err := redis.Dial("tcp", "db:6379")
     if err != nil {
       panic(err)
     }

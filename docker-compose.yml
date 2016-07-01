@@ -1,26 +1,27 @@
----
-lb:
-  build: haproxy
-  ports:
-   - "80:80"
+version: '2'
+services:
+  db:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - data:/data
+    networks:
+      - dubdub
 
-dbdata:
-  image: "redis:latest"
-  volumes: 
-    - /data
+  web:
+    build: counter-app
+    labels:
+      - "interlock.hostname=meetup"
+      - "interlock.domain=govcloud.com"
+    ports:
+      - "8080"
+    networks:
+      - dubdub
 
-db: 
-  image: "redis:latest"
-  ports: 
-    - "6379:6379"
-  volumes_from: 
-    - dbdata
+networks:
+  dubdub:
+    driver: overlay
 
-web: 
-  build: counter-app
-  links: 
-    - "db:redis-db"
-  environment:
-    - INTERLOCK_DATA={"hostname":"docker-training.com","domain":"docker-training.com"}
-  ports: 
-    - "8080"
+volumes:
+  data: {}
