@@ -1,19 +1,17 @@
-version: '2'
+version: "3.2"
+
 services:
   db:
     image: "redis:latest"
-    ports:
-      - "6379:6379"
     volumes:
       - data:/data
     networks:
-      - dubdub
+      dubdub:
+        aliases:
+          - db
 
   web:
-    build: counter-app
-    labels:
-      - "interlock.hostname=meetup"
-      - "interlock.domain=govcloud.com"
+    image: anoop/counter-app
     ports:
       - "8080"
     networks:
@@ -24,4 +22,4 @@ networks:
     driver: overlay
 
 volumes:
-  data: {}
+  data:
