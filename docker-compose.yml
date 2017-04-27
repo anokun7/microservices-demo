@@ -10,6 +10,8 @@ services:
 
   web:
     image: anoop/counter-app
+    deploy:
+      replicas: 10
     ports:
       - "8080"
     networks:
