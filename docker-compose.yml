@@ -7,8 +7,6 @@ services:
       - data:/data
     networks:
       dubdub:
-        aliases:
-          - db
 
   web:
     image: anoop/counter-app
